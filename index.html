@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
+  <title>🚗 Moy Almashtirish</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="theme-color" content="#2196F3">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+</head>
+<body>
+  <div class="app-container">
+    <!-- HEADER -->
+    <header class="header">
+      <div class="header-content">
+        <h1>🚗 Moy Almashtirish</h1>
+        <p>🆓 100% Tekin</p>
+      </div>
+      <button class="btn-menu" id="btn-settings">⚙️</button>
+    </header>
+
+    <!-- NAVIGATION -->
+    <nav class="bottom-nav">
+      <button class="nav-item active" data-page="home">
+        <span class="nav-icon">📊</span>
+        <span>Bosh</span>
+      </button>
+      <button class="nav-item" data-page="cars">
+        <span class="nav-icon">🚗</span>
+        <span>Mashinalar</span>
+      </button>
+      <button class="nav-item" data-page="add-car">
+        <span class="nav-icon">➕</span>
+        <span>Qo'shish</span>
+      </button>
+      <button class="nav-item" data-page="oils">
+        <span class="nav-icon">🛢️</span>
+        <span>Moylar</span>
+      </button>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+      <!-- HOME PAGE -->
+      <section id="home" class="page active">
+        <div class="page-scroll">
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon">🚗</div>
+              <p class="stat-value" id="total-cars-stat">0</p>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">🔴</div>
+              <p class="stat-value" id="urgent-stat">0</p>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">⚠️</div>
+              <p class="stat-value" id="warning-stat">0</p>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">✅</div>
+              <p class="stat-value" id="good-stat">0</p>
+            </div>
+          </div>
+
+          <section class="section">
+            <h2>⚡ Yaqin Vaqtda Almashtirish</h2>
+            <div id="urgent-list" class="cars-list"></div>
+          </section>
+
+          <section class="section">
+            <h2>🚗 Barcha Mashinalar</h2>
+            <div id="all-cars-list" class="cars-list"></div>
+          </section>
+        </div>
+      </section>
+
+      <!-- CARS PAGE -->
+      <section id="cars" class="page">
+        <div class="page-scroll">
+          <div id="cars-grid" class="cars-grid"></div>
+        </div>
+      </section>
+
+      <!-- ADD CAR PAGE -->
+      <section id="add-car" class="page">
+        <div class="page-scroll">
+          <div class="add-car-container">
+            <div class="image-upload-section">
+              <h3>📸 Mashina Rasmini Yükläng</h3>
+              <p class="upload-hint">🆓 Tesseract.js - TEKIN TAHLIL</p>
+              
+              <div class="image-drop-zone" id="image-drop-zone">
+                <input type="file" id="car-image-input" accept="image/*" style="display: none;">
+                <div class="drop-zone-content">
+                  <p class="drop-icon">📷</p>
+                  <p>Rasmni bu yerga olib qo'ying</p>
+                </div>
+              </div>
+
+              <div class="recognized-info">
+                <div id="recognized-number">
+                  <span>📍 Raqam: <strong id="recog-number">-</strong></span>
+                </div>
+                <div id="recognized-color">
+                  <span>🎨 Rang: <strong id="recog-color">-</strong></span>
+                </div>
+              </div>
+            </div>
+
+            <form id="add-car-form" class="form-container">
+              <div class="form-section">
+                <h4>Mashina Ma'lumotlari</h4>
+                <div class="form-group">
+                  <label>Mashina Nomi *</label>
+                  <input type="text" id="car-name" placeholder="Toyota Camry" required>
+                </div>
+                <div class="form-group">
+                  <label>Mashina Nomeri *</label>
+                  <input type="text" id="car-number" placeholder="01A123BC" required>
+                </div>
+                <div class="form-group">
+                  <label>Kunlik KM *</label>
+                  <input type="number" id="daily-km" placeholder="100" min="1" required>
+                </div>
+                <div class="form-group">
+                  <label>Telefon *</label>
+                  <input type="tel" id="phone-number" placeholder="+998901234567" required>
+                </div>
+              </div>
+
+              <div class="form-section">
+                <h4>Moy Sozlamasi</h4>
+                <div class="form-group">
+                  <label>🛢️ Moy Turi *</label>
+                  <select id="oil-name" required>
+                    <option value="">Tanlang...</option>
+                    <option value="SAE 5W-30">SAE 5W-30</option>
+                    <option value="SAE 0W-20">SAE 0W-20</option>
+                    <option value="SAE 10W-40">SAE 10W-40</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-section">
+                <h4>Xizmat Intervallari</h4>
+                <div class="form-group">
+                  <label>🔵 Antifriz (KM)</label>
+                  <input type="number" id="antifreeze-interval" value="3000" min="1000" required>
+                </div>
+                <div class="form-group">
+                  <label>🟢 Karobka Moyi (KM)</label>
+                  <input type="number" id="gearbox-interval" value="50000" min="10000" required>
+                </div>
+              </div>
+
+              <button type="submit" class="btn-submit">✅ Qo'shish</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- OILS PAGE -->
+      <section id="oils" class="page">
+        <div class="page-scroll">
+          <div class="oils-container">
+            <h2>🛢️ Moy Turlari</h2>
+            <div id="oils-list" class="oils-list"></div>
+
+            <div class="add-oil-section">
+              <h3>🆕 Yangi Moy Tupi</h3>
+              <form id="add-oil-form" class="form-container">
+                <div class="form-group">
+                  <label>Moy Nomi *</label>
+                  <input type="text" id="oil-name-input" placeholder="SAE 5W-30" required>
+                </div>
+                <div class="form-group">
+                  <label>Almashtirish KM *</label>
+                  <input type="number" id="oil-interval-input" value="18000" min="5000" required>
+                </div>
+                <button type="submit" class="btn-primary">➕ Qo'shish</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- MODAL -->
+    <div id="car-modal" class="modal">
+      <div class="modal-overlay"></div>
+      <div class="modal-content">
+        <button class="close-btn">&times;</button>
+        <div class="car-modal-header" id="modal-car-info"></div>
+
+        <div class="modal-tabs">
+          <button class="modal-tab-btn active" data-tab="info">📋 Tafsilot</button>
+          <button class="modal-tab-btn" data-tab="update">📍 Yangilash</button>
+        </div>
+
+        <div class="modal-tabs-content">
+          <div id="info-tab" class="modal-tab-content active">
+            <div id="modal-services" class="services-container"></div>
+          </div>
+
+          <div id="update-tab" class="modal-tab-content">
+            <div class="form-group">
+              <label>Hozirgi KM *</label>
+              <input type="number" id="modal-current-km" placeholder="KM" required>
+            </div>
+            <button class="btn-primary" id="btn-update-km">📍 KM Yangilash</button>
+
+            <hr style="margin: 20px 0; border: none; border-top: 1px solid #e0e0e0;">
+
+            <h4>⚙️ Xizmat Almashtirish</h4>
+
+            <div class="form-group">
+              <label>Xizmat Turi</label>
+              <select id="modal-service-type">
+                <option value="oil">🛢️ Dvigatel Moyi</option>
+                <option value="antifreeze">🔵 Antifriz</option>
+                <option value="gearbox">🟢 Karobka Moyi</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Moy Turi</label>
+              <input type="text" id="modal-oil-name" placeholder="SAE 5W-30" required>
+            </div>
+
+            <button class="btn-success" id="btn-change-oil">✅ Almashtirish</button>
+          </div>
+        </div>
+
+        <button class="btn-danger" id="btn-delete-car">🗑️ O'chirish</button>
+      </div>
+    </div>
+
+    <!-- TOAST -->
+    <div id="toast" class="toast"></div>
+
+    <!-- LOADING -->
+    <div id="loading" class="loading">
+      <div class="spinner"></div>
+      <p id="loading-text">Tahlil...</p>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@v4/dist/tesseract.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
